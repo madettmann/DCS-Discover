@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <script src="../../static/jmol/jsmol/JSmol.min.js"></script>
+    <script src="../../static/jmol/jsmol/js/j2sjmol.js"></script>
+    <script> jsmolInitialize("../../jmol/jsmol"); </script>
+    <div class="container">
+        <div class="row d-flex flex-wrap">
+            <div class = "col-sm-8">
+                {% autoescape off %}
+                    {{layout}}
+                {% endautoescape %}
+            </div>
+            <div class="col-sm-4 d-flex" >
+                <script>
+                    var Info = {
+                    color: "#FFFFFF",
+                    height: 400,
+                    width: "100%",
+                    script: "load {{material.structure_url}} {1 1 1}; spin on",
+                    use: "HTML5",
+                    j2sPath: "../../static/jmol/jsmol/j2s"
+                    };
+
+                    Jmol.getApplet("myJmol", Info);
+                </script>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        [class*="col-"] {
+        margin-bottom: 15px;
+        }
+    </style>
+    {% load static %}
+    <div class="container">
+        <small>
+        <div class="row align-items-stretch">
+          <div class="col-md-3">
+            <div class="card text-center h-100">
+                <div class="card-header">
+                  Name
+                </div>
+                <div class="card-body">
+                  <p class="card-text">{{material.compound_name}}</p>
+                </div>
+            </div>
+          </div>
+          
+          <div class="col-md-3">
+            <div class="card text-center h-100">
+                <div class="card-header">
+                  Alt. Name
+                </div>
+                <div class="card-body">
+                  <p class="card-text">{{material.iupac_name}}</p>
+                </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card text-center h-100">
+                <div class="card-header">
+                  Mobility (cm<sup>2</sup>/Vs)
+                </div>
+                <div class="card-body">
+                  <p class="card-text">{{material.mobility}}</p>
+                </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card text-center h-100">
+                <div class="card-header">
+                  Structure File
+                </div>
+                <div class="card-body">
+                  <a href={{material.structure_url}} class="btn btn-primary">Download</a>
+                </div>
+              </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card text-center h-100">
+                <div class="card-header">
+                  Experimental Data
+                </div>
+                <div class="card-body">
+                  <a href={{material.experimental_data_file}} class="btn btn-primary">Download</a>
+                </div>
+              </div>
+          </div>
+          {% if material.dft_data_file %}
+          <div class="col-md-3">
+            <div class="card text-center h-100">
+                <div class="card-header">
+                  DFT Data
+                </div>
+                <div class="card-body">
+                  <a href={{material.dft_data_file}} class="btn btn-primary">Download</a>
+                </div>
+              </div>
+          </div>
+          {% endif %}
+          {% if material.dftb_data_file %}
+          <div class="col-md-3">
+            <div class="card text-center h-100">
+                <div class="card-header">
+                  DFTB+ Data
+                </div>
+                <div class="card-body">
+                  <a href={{material.dftb_data_file}} class="btn btn-primary">Download</a>
+                </div>
+              </div>
+          </div>
+          {% endif %}
+          {% if material.chimes_data_file %}
+          <div class="col-md-3">
+            <div class="card text-center h-100">
+                <div class="card-header">
+                  DFTB+/ChIMES Data
+                </div>
+                <div class="card-body">
+                  <a href={{material.chimes_data_file}} class="btn btn-primary">Download</a>
+                </div>
+              </div>
+          </div>
+          {% endif %}
+        </div>
+    </small>
+    </div>
+{% endblock %}
