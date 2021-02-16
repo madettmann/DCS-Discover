@@ -28,7 +28,6 @@ SECRET_KEY = key_file.read()
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
-'twm(*tcv*3)99(@c0amc)!eesb1a1cli5v2xs+-pl_d4p-qd)*'
 
 # Application definition
 
