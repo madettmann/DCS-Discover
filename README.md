@@ -1,3 +1,6 @@
+# View
+The site is live [here](https://ins-dashboard.uc.r.appspot.com).
+
 # CNS-Discover
 A database for seeing computed and experimental inelastic neutron scattering spectra.
 
