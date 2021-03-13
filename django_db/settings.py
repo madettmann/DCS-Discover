@@ -76,35 +76,43 @@ WSGI_APPLICATION = 'django_db.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 # [START db_setup]
-if os.getenv('GAE_APPLICATION', None):
-    # Running on production App Engine, so connect to Google Cloud SQL using
-    # the unix socket at /cloudsql/<your-cloudsql-connection string>
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'HOST': '/cloudsql/ins-dashboard:us-central1:ins-database',
-            'USER': 'madettmann',
-            'PASSWORD': 'i9SJtC6GB3imNFA',
-            'NAME': 'materials',
+# if os.getenv('GAE_APPLICATION', None):
+#     # Running on production App Engine, so connect to Google Cloud SQL using
+#     # the unix socket at /cloudsql/<your-cloudsql-connection string>
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.mysql',
+#             'HOST': '/cloudsql/ins-dashboard:us-central1:ins-database',
+#             'USER': 'madettmann',
+#             'PASSWORD': 'i9SJtC6GB3imNFA',
+#             'NAME': 'materials',
+#         }
+#     }
+# else:
+#     # Running locally so connect to either a local MySQL instance or connect 
+#     # to Cloud SQL via the proxy.  To start the proxy via command line: 
+#     #    $ cloud_sql_proxy -instances=[INSTANCE_CONNECTION_NAME]=tcp:3306 
+#     # See https://cloud.google.com/sql/docs/mysql-connect-proxy
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.mysql',
+#             'HOST': '127.0.0.1',
+#             'PORT': '3306',
+#             'NAME': "materials",
+#             'USER': 'madettmann',
+#             'PASSWORD': 'i9SJtC6GB3imNFA',
+#         }
+#     }
+# # [END db_setup]
+DATABASES = {   
+    'default': {
+        'ENGINE': 'djongo',      
+        'NAME': 'dcs-discover',   
+        'HOST': 'mongodb+srv://madettmann:Yu8dk3GYPngtTG@dcs-discover.takpn.mongodb.net/dcs-discover?retryWrites=true&w=majority',
+        'USER': 'madettmann',
+        'PASSWORD': 'Yu8dk3GYPngtTG',
         }
     }
-else:
-    # Running locally so connect to either a local MySQL instance or connect 
-    # to Cloud SQL via the proxy.  To start the proxy via command line: 
-    #    $ cloud_sql_proxy -instances=[INSTANCE_CONNECTION_NAME]=tcp:3306 
-    # See https://cloud.google.com/sql/docs/mysql-connect-proxy
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'HOST': '127.0.0.1',
-            'PORT': '3306',
-            'NAME': "materials",
-            'USER': 'madettmann',
-            'PASSWORD': 'i9SJtC6GB3imNFA',
-        }
-    }
-# [END db_setup]
-
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 

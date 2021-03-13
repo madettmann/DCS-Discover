@@ -6,12 +6,12 @@
     <script> jsmolInitialize("../../jmol/jsmol"); </script>
     <div class="container">
         <div class="row d-flex flex-wrap">
-            <div class = "col-sm-8">
+            <div class = "col-sm-8 ">
                 {% autoescape off %}
                     {{layout}}
                 {% endautoescape %}
             </div>
-            <div class="col-sm-4 d-flex" >
+            <div class="col-sm-4 d-flex h-100 " >
                 <script>
                     var Info = {
                     color: "#FFFFFF",
@@ -35,11 +35,10 @@
     </style>
     {% load static %}
     <div class="container">
-        <small>
         <div class="row align-items-stretch">
-          <div class="col-md-3">
+          <div class="col-md-4">
             <div class="card text-center h-100">
-                <div class="card-header">
+                <div class="card-header bg-secondary text-dark">
                   Name
                 </div>
                 <div class="card-body">
@@ -48,9 +47,9 @@
             </div>
           </div>
           
-          <div class="col-md-3">
+          <div class="col-md-4">
             <div class="card text-center h-100">
-                <div class="card-header">
+                <div class="card-header bg-secondary text-dark">
                   Alt. Name
                 </div>
                 <div class="card-body">
@@ -58,9 +57,9 @@
                 </div>
             </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-4">
             <div class="card text-center h-100">
-                <div class="card-header">
+                <div class="card-header bg-secondary text-dark">
                   Mobility (cm<sup>2</sup>/Vs)
                 </div>
                 <div class="card-body">
@@ -68,9 +67,9 @@
                 </div>
             </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-4">
             <div class="card text-center h-100">
-                <div class="card-header">
+                <div class="card-header bg-secondary text-dark">
                   Structure File
                 </div>
                 <div class="card-body">
@@ -78,9 +77,9 @@
                 </div>
               </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-4">
             <div class="card text-center h-100">
-                <div class="card-header">
+                <div class="card-header bg-secondary text-dark">
                   Experimental Data
                 </div>
                 <div class="card-body">
@@ -89,9 +88,9 @@
               </div>
           </div>
           {% if material.dft_data_file %}
-          <div class="col-md-3">
+          <div class="col-md-4">
             <div class="card text-center h-100">
-                <div class="card-header">
+                <div class="card-header bg-secondary text-dark">
                   DFT Data
                 </div>
                 <div class="card-body">
@@ -101,9 +100,9 @@
           </div>
           {% endif %}
           {% if material.dftb_data_file %}
-          <div class="col-md-3">
+          <div class="col-md-4">
             <div class="card text-center h-100">
-                <div class="card-header">
+                <div class="card-header bg-secondary text-dark">
                   DFTB+ Data
                 </div>
                 <div class="card-body">
@@ -113,9 +112,9 @@
           </div>
           {% endif %}
           {% if material.chimes_data_file %}
-          <div class="col-md-3">
+          <div class="col-md-4">
             <div class="card text-center h-100">
-                <div class="card-header">
+                <div class="card-header bg-secondary text-dark">
                   DFTB+/ChIMES Data
                 </div>
                 <div class="card-body">
@@ -125,6 +124,5 @@
           </div>
           {% endif %}
         </div>
-    </small>
     </div>
 {% endblock %}

@@ -1,255 +1,280 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container">
+<div class="container text-dark">
      <br>
      <div class="row">
-          <div class="col-md-3 align-middle sticky-top h-100  	d-none d-md-block">
-               <div id="list-example" class="list-group">
-                    <a class="list-group-item list-group-item-action text-truncate" href="#intro">Organic Electronics</a>
-                    <a class="list-group-item list-group-item-action text-truncate" href="#transport">Charge Transport in
-                         OSCs</a>
-                    <a class="list-group-item list-group-item-action text-truncate" href="#measure">Measuring Motions in
-                         OSCs</a>
-                    <a class="list-group-item list-group-item-action text-truncate" href="#simulate">Simulating Motions in
-                         OSCs</a>
-                    <a class="list-group-item list-group-item-action text-truncate" href="#citations">Works Cited</a>
-
-               </div>
-          </div>
-          <div class="col-12 col-md-9">
-               <div data-spy="scroll" data-target="list-example" data-offset="5">
-                    <h4 id="intro">Organic Electronics</h1>
-                         <p>OSCs are materials which have an alternating single-double carbon bond (Fig 1). This pattern
-                              causes charge delocalization along the alternating chain, leading to charge transport. Within
-                              the class of OSCs, there are two main types: polymers and small-molecules. In polymers, long
-                              conjugated chains form a backbone for charge to travel along; side chains extend from the back
-                              bone. These materials generally form regions of relative crystallinity and other regions which
-                              are amorphous. Polymers are difficult to simulate accurately due to their large size and
-                              complex morphology. The other category of organic semiconductor is the small-molecule type.
-                              Small-molecule semiconductors generally have a series of conjugated rings along with side
-                              chains. They consist of roughly 100 atoms and form a highly-ordered molecular lattice. These
-                              materials are much simpler to simulate due to their smaller size and basic morphology.
-                         </p>
-                         <figure class="figure">
+          <div class="col-12">
+               <h4>Introduction</h4>
+               <p>The Davis Computational Spectroscopy (DCS) projects aims to simplify the process of predicting a
+                    spectrum. This is DCS Discover, a database of inelastic neutron scattering (INS) spectra computed
+                    and measured as well as the crystal structures of each material. Our other work, <a class="text-info" href="#">DCS
+                         flow</a>, is a computational workflow that allows researchers to compute INS, Raman, and
+                    infrared (IR) spectra from a crystal strucutre. Many of the computed spectra in this database were
+                    computed using DCS flow. This database makes it easy to compare computed and experimental INS
+                    spectra for a number of organic materials.</p>
+               <p>Phonons, or atomic vibrations, are responsible for a number of processes within OSCs. Because
+                    small-molecule OSCs are weakly bound by Van der Waals forces, charges transport is largely affected
+                    by the phonons. Thus an accurate description of phonon modes is necessary to understand charge
+                    transport. Similarly, heat transport is also largely dependent on the phonon modes. In both cases,
+                    the best way to verify the computed phonon modes' accuracy is to compare to an INS spectrum. This is
+                    becasue INS can measure more phonon modes directly than any other experimental technique.</p>
+               <p>When it comes to predicting the phonon modes, quantum calculations must be performed. These are
+                    typically computationally costly DFT simulations. Many of the spectra in this database, however were
+                    computed using DFTB+, a tight-binding approximation to DFT. In addition, DFTB+ with a ChIMES
+                    correction was also employed. This correction improves the DFTB+ phonon predictions without adding
+                    significant computational cost. The spectra in this database demonstrate that in many cases DFTB+ or
+                    DFTB+ with ChIMES is sufficient to produce an accurate description of the phonon modes.</p>
+               <p>What follows is a much more in-depth description of charge transport in organic semiconductors, INS
+                    spectroscopy, and how to compute INS spectra. For more information about DCS Flow, our simple method
+                    for computing INS, Raman, and IR spectra, please visit our <a class="text-info" href="#">documentation website</a> for
+                    more information.</p>
+               <h4 id="intro">Organic Electronics</h1>
+                    <p>OSCs are materials which have an alternating single-double carbon bond (Fig 1). This pattern
+                         causes charge delocalization along the alternating chain, leading to charge transport. Within
+                         the class of OSCs, there are two main types: polymers and small-molecules. In polymers, long
+                         conjugated chains form a backbone for charge to travel along; side chains extend from the back
+                         bone. These materials generally form regions of relative crystallinity and other regions which
+                         are amorphous. Polymers are difficult to simulate accurately due to their large size and
+                         complex morphology. The other category of organic semiconductor is the small-molecule type.
+                         Small-molecule semiconductors generally have a series of conjugated rings along with side
+                         chains. They consist of roughly 100 atoms and form a highly-ordered molecular lattice. These
+                         materials are much simpler to simulate due to their smaller size and basic morphology.
+                    </p>
+                    <div class="row justify-content-center">
+                         <figure class="figure w-75">
                               <img src="/static/images/Benzene.png" class="figure-img img-fluid rounded" alt="Benzene">
                               <figcaption class="figure-caption"><b>Figure 1</b> Illustration of benzene ring (left) and
                                    delocalized orbitals due to the alternating single-double bond (right).</figcaption>
                          </figure>
-                         <h4 id="transport">Charge Transport in OSCs</h4>
-                         <p>Both the hopping model and band theory fail to describe charge transport in small-molecule OSCs.
-                              This is because the basic assumptions of each model do not apply to organic small-molecule
-                              materials.<sup>1</sup> Band theory assumes a highly ordered material in which the lattice sites
-                              are stationary. In small-molecule OSCs, however, the molecules are constantly moving.
-                              At a given snapshot, the molecules would appear disordered. The
-                              hopping model also fails because although the molecules are disordered at an instant, the
-                              hopping model cannot accommodate dynamic disorder. Furthermore, experimental studies have shown
-                              both band-like temperature dependence and localized charges which are irreconcilable with
-                              both theories.<sup>2</sup> Thus, a new model was needed to describe charge transport in these
-                              materials.</p>
-                         <figure class="figure">
+                    </div>
+                    <h4 id="transport">Charge Transport in OSCs</h4>
+                    <p>Both the hopping model and band theory fail to describe charge transport in small-molecule OSCs.
+                         This is because the basic assumptions of each model do not apply to organic small-molecule
+                         materials.<sup>1</sup> Band theory assumes a highly ordered material in which the lattice sites
+                         are stationary. In small-molecule OSCs, however, the molecules are constantly moving.
+                         At a given snapshot, the molecules would appear disordered. The
+                         hopping model also fails because although the molecules are disordered at an instant, the
+                         hopping model cannot accommodate dynamic disorder. Furthermore, experimental studies have shown
+                         both band-like temperature dependence and localized charges which are irreconcilable with
+                         both theories.<sup>2</sup> Thus, a new model was needed to describe charge transport in these
+                         materials.</p>
+                    <div class="row justify-content-center">
+                         <figure class="figure w-75">
                               <img src="/static/images/TLT.png" class="figure-img img-fluid rounded"
                                    alt="Transient Localization Theory">
                               <figcaption class="figure-caption"><b>Figure 2</b> Illustration of transient localization
                                    theory. L describes the transient localization length and \(\tau\) describes the
                                    relaxation time.</figcaption>
                          </figure>
-                         <p>Transient localization theory (TLT) was developed by Ciuchi, Fratini, and Mayou in
-                              2011.<sup>3</sup> It begins with the Hamiltonian for electron transfer modulated by a molecular
-                              vibration with a frequency \(\omega_0\). The Hamiltonian will
-                              not be written here as it is beyond the scope of this discussion, but the results of this
-                              formulation
-                              will be discussed briefly. At times \(t<\frac{1}{\omega_0}\), the wavefunction remains localized. However, at
-                                   longer times localization is destroyed and diffusion-like transport dominates. In order to
-                                   bridge the gap between localization and diffusive motion, a relaxation time approximation
-                                   is used. This approximation defines a characteristic time which describes the damping of
-                                   the velocity correlation function \(C\) according to</p>
-                                   <p>\[ C(t) = C_0(t) e^{\frac{t}{\tau}} \]</p>
-                                   <p>where \(C_0\) is some reference velocity correlation. In this case, the wavefunction is
-                                        initially localized on a single molecule and spreads to nearby molecules at times
-                                        less than \(\tau\). The spread of the electron in time \(t\approx\tau\) can be
-                                        described by
-                                        the quantity
-                                   </p>
-                                   <p> \[ L_0^2(\tau) = \frac{\int e^-\frac{t}{\tau}\Delta x_0^2(t)dt}{\tau} \]</p>
-                                   <p>which is the transient localization length and \(\Delta x^2(t) = \langle (x(t) -
-                                        x(0))^2\rangle\). Using this information, it is possible to express the mobility as
-                                   </p>
-                                   <p>\[ \mu = \frac{e}{k_bT}\frac{L_0^2(\tau)}{2\tau} \]</p>
-                                   <p>Although it is not fully developed here, the temperature relationship can be shown to
-                                        have power-law dependence similar to that of the band theory description.<sup>4</sup>
-                                        Thus, TLT explains localization of charge and predicts the correct temperature
-                                        dependence for small-molecule OSCs.
-                                        Additionally, it will be shown later that if the phonon modes are accurately
-                                        calculated for a real system, TLT can predict
-                                        experimental room-temperature mobilities.
-                                   </p>
-                                   <h4 id="measure">Measuring Motions in OSCs</h4>
-                                   <p>According to TLT, accurate prediction of mobility requires an accurate description of
-                                        the phonon modes present in a small-molecule semiconductor. Therefore, an
-                                        experimental technique to confirm the theoretical phonon modes is necessary.
-                                        Inelastic neutron scattering (INS) provides a way to measure
-                                        phonons directly throughout the full Brillouin zone.<sup>5</sup> While other
-                                        techniques such as Raman or infrared spectroscopy are more widely available, both
-                                        techniques suffer from selection rules—only transitions which correspond to a
-                                        particular dipole change are active. Furthermore, these techniques can only measure
-                                        phonon modes at the gamma point. This means that several vibrational modes are left
-                                        out entirely. Harrelson et al. showed that these missing modes
-                                        significantly change the calculated mobility.<sup>6</sup>
-                                   </p>
-                                   <p>INS measures the energy and momentum losses from an incident beam of neutrons to the
-                                        sample. The amount of interaction between an atom and a neutron is the atom’s neutron
-                                        cross section. Hydrogen has the largest cross section at roughly 80 Barns which means
-                                        an INS spectrum is primarily showing the motion of the hydrogen atoms. Small-molecule
-                                        OSCs are ideal materials for this technique as they often have hydrogen
-                                        atoms near the conjugated core.
-                                   </p>
+                    </div>
+                    <p>Transient localization theory (TLT) was developed by Ciuchi, Fratini, and Mayou in
+                         2011.<sup>3</sup> It begins with the Hamiltonian for electron transfer modulated by a molecular
+                         vibration with a frequency \(\omega_0\). The Hamiltonian will
+                         not be written here as it is beyond the scope of this discussion, but the results of this
+                         formulation
+                         will be discussed briefly. At times \(t<\frac{1}{\omega_0}\), the wavefunction remains
+                              localized. However, at longer times localization is destroyed and diffusion-like transport
+                              dominates. In order to bridge the gap between localization and diffusive motion, a
+                              relaxation time approximation is used. This approximation defines a characteristic time
+                              which describes the damping of the velocity correlation function \(C\) according to</p>
+                              <p>\[ C(t) = C_0(t) e^{\frac{t}{\tau}} \]</p>
+                              <p>where \(C_0\) is some reference velocity correlation. In this case, the wavefunction is
+                                   initially localized on a single molecule and spreads to nearby molecules at times
+                                   less than \(\tau\). The spread of the electron in time \(t\approx\tau\) can be
+                                   described by
+                                   the quantity
+                              </p>
+                              <p> \[ L_0^2(\tau) = \frac{\int e^-\frac{t}{\tau}\Delta x_0^2(t)dt}{\tau} \]</p>
+                              <p>which is the transient localization length and \(\Delta x^2(t) = \langle (x(t) -
+                                   x(0))^2\rangle\). Using this information, it is possible to express the mobility as
+                              </p>
+                              <p>\[ \mu = \frac{e}{k_bT}\frac{L_0^2(\tau)}{2\tau} \]</p>
+                              <p>Although it is not fully developed here, the temperature relationship can be shown to
+                                   have power-law dependence similar to that of the band theory description.<sup>4</sup>
+                                   Thus, TLT explains localization of charge and predicts the correct temperature
+                                   dependence for small-molecule OSCs.
+                                   Additionally, it will be shown later that if the phonon modes are accurately
+                                   calculated for a real system, TLT can predict
+                                   experimental room-temperature mobilities.
+                              </p>
+                              <h4 id="measure">Measuring Motions in OSCs</h4>
+                              <p>According to TLT, accurate prediction of mobility requires an accurate description of
+                                   the phonon modes present in a small-molecule semiconductor. Therefore, an
+                                   experimental technique to confirm the theoretical phonon modes is necessary.
+                                   Inelastic neutron scattering (INS) provides a way to measure
+                                   phonons directly throughout the full Brillouin zone.<sup>5</sup> While other
+                                   techniques such as Raman or infrared spectroscopy are more widely available, both
+                                   techniques suffer from selection rules—only transitions which correspond to a
+                                   particular dipole change are active. Furthermore, these techniques can only measure
+                                   phonon modes at the gamma point. This means that several vibrational modes are left
+                                   out entirely. Harrelson et al. showed that these missing modes
+                                   significantly change the calculated mobility.<sup>6</sup>
+                              </p>
+                              <p>INS measures the energy and momentum losses from an incident beam of neutrons to the
+                                   sample. The amount of interaction between an atom and a neutron is the atom’s neutron
+                                   cross section. Hydrogen has the largest cross section at roughly 80 Barns which means
+                                   an INS spectrum is primarily showing the motion of the hydrogen atoms. Small-molecule
+                                   OSCs are ideal materials for this technique as they often have hydrogen
+                                   atoms near the conjugated core.
+                              </p>
+                              <div class="row justify-content-center">
                                    <figure class="figure">
-                                        <img src="/static/images/Plot.png" class="figure-img img-fluid rounded w-100"
+                                        <img src="/static/images/Plot.png" class="figure-img img-fluid rounded"
                                              alt="INS Spectrum of Phthalocyanine">
-                                        <figcaption class="figure-caption"><b>Figure 3</b>INS spectrum of Phthalocyanine at 5
-                                             Kelvin. A simulated spectrum using the DFT method is also shown.</figcaption>
+                                        <figcaption class="figure-caption"><b>Figure 3 </b>INS spectrum of
+                                             Phthalocyanine at 5
+                                             Kelvin. A simulated spectrum using the DFT method is also shown.
+                                        </figcaption>
                                    </figure>
-                                   <p>INS provides a neutron density of states, meaning that the intensity tells how active a
-                                        particular mode is. The horizontal axis of an INS spectrum is energy transferred (Fig
-                                        2). On the high-energy end of the spectrum are modes involving only a few atoms. The
-                                        spring constant for these modes is high which places them higher in energy. The low
-                                        end of the spectrum is most important for two reasons. First, these modes have a low
-                                        spring constant which means they correspond to long-range, slow motions. These are
-                                        the modes that TLT predicts to be the most important for charge transport. Second,
-                                        they are the modes which are thermally active at room temperature. Only modes with
-                                        energy at or below \(k_BT\) are active at a given temperature.
-                                   </p>
-                                   <p>The VISION spectrometer at Oak Ridge National Lab has the highest signal-to-noise ratio
-                                        of any INS instrument.<sup>7</sup> Its inverted geometry time-of-flight setup allows
-                                        the resolution to be constant across the entire energy range. The wide energy range,
-                                        high
-                                        signal-to-noise ratio, and the fact that small molecule OSCs are
-                                        hydrogenous make the VISION spectrometer the only effective way to measure phonon
-                                        modes in these samples.
-                                   </p>
-                                   <h4 id="simulate">Simulating Motions in OSCs</h4>
-                                   <p>An accurate method for calculating phonons is required for accurate calculations of
-                                        mobility from TLT. This is traditionally done via the finite displacement supercell
-                                        method in
-                                        conjunction with density functional theory (DFT).<sup>8</sup> DFT replaces the
-                                        multielectron quantum problem with a single electron in a charged field. The
-                                        Kohn-Sham theorem is the central assumption of DFT. It states that there exists some
-                                        single electron-field density which is identical to the multielectron density. DFT
-                                        also approximates the exchange-correlation energy which contains two parts. First is
-                                        the energy loss due to the indistinguishability of electrons as defined by the Pauli
-                                        principle. Second is the energy increase from electron correlation. DFT is highly
-                                        accurate for calculating forces which makes it suitable for phonon calculations.
-                                   </p>
-                                   <figure class="figure">
+                              </div>
+                              <p>INS provides a neutron density of states, meaning that the intensity tells how active a
+                                   particular mode is. The horizontal axis of an INS spectrum is energy transferred (Fig
+                                   2). On the high-energy end of the spectrum are modes involving only a few atoms. The
+                                   spring constant for these modes is high which places them higher in energy. The low
+                                   end of the spectrum is most important for two reasons. First, these modes have a low
+                                   spring constant which means they correspond to long-range, slow motions. These are
+                                   the modes that TLT predicts to be the most important for charge transport. Second,
+                                   they are the modes which are thermally active at room temperature. Only modes with
+                                   energy at or below \(k_BT\) are active at a given temperature.
+                              </p>
+                              <p>The VISION spectrometer at Oak Ridge National Lab has the highest signal-to-noise ratio
+                                   of any INS instrument.<sup>7</sup> Its inverted geometry time-of-flight setup allows
+                                   the resolution to be constant across the entire energy range. The wide energy range,
+                                   high
+                                   signal-to-noise ratio, and the fact that small molecule OSCs are
+                                   hydrogenous make the VISION spectrometer the only effective way to measure phonon
+                                   modes in these samples.
+                              </p>
+                              <h4 id="simulate">Simulating Motions in OSCs</h4>
+                              <p>An accurate method for calculating phonons is required for accurate calculations of
+                                   mobility from TLT. This is traditionally done via the finite displacement supercell
+                                   method in
+                                   conjunction with density functional theory (DFT).<sup>8</sup> DFT replaces the
+                                   multielectron quantum problem with a single electron in a charged field. The
+                                   Kohn-Sham theorem is the central assumption of DFT. It states that there exists some
+                                   single electron-field density which is identical to the multielectron density. DFT
+                                   also approximates the exchange-correlation energy which contains two parts. First is
+                                   the energy loss due to the indistinguishability of electrons as defined by the Pauli
+                                   principle. Second is the energy increase from electron correlation. DFT is highly
+                                   accurate for calculating forces which makes it suitable for phonon calculations.
+                              </p>
+                              <div class="row justify-content-center">
+                                   <figure class="figure w-75">
                                         <img src="/static/images/Finite Displacement.png"
-                                             class="figure-img img-fluid rounded" alt="Finite Displacement Supercell Method">
+                                             class="figure-img img-fluid rounded"
+                                             alt="Finite Displacement Supercell Method">
                                         <figcaption class="figure-caption"><b>Figure 4</b> Illustration of the finite
-                                             displacement supercell method. Each rectangle represents a single unit cell.
-                                             Here, a 3x4 supercell is shown indicating that there are three copies in the x
+                                             displacement supercell method. Each rectangle represents a single unit
+                                             cell.
+                                             Here, a 3x4 supercell is shown indicating that there are three copies in
+                                             the x
                                              direction and 4 in the y direction. On the right, a single atom (red) is
-                                             displaced and the resulting forces are shown as arrows. This supercell avoids
-                                             the minimum image problem because the red atom does not feed a force due to its
+                                             displaced and the resulting forces are shown as arrows. This supercell
+                                             avoids
+                                             the minimum image problem because the red atom does not feed a force due to
+                                             its
                                              own displacement.</figcaption>
                                    </figure>
-                                   <p>The finite displacement supercell method uses several approximations to calculate the
-                                        spring constants of each phonon mode.<sup>9</sup> It works by first building a large
-                                        enough
-                                        supercell to avoid the minimum image problem in which an atom interacts with a
-                                        periodic copy of itself. Next, each atom is displaced in a single direction (x, y, or
-                                        z) by a small but finite amount. Then the spring constant is approximated by
-                                   </p>
-                                   <p>\[ \Phi_{aibj} = \frac{\partial F_{ai}}{\partial U_{bj}} \approx \frac{\Delta
-                                        F_{ai}}{\Delta U_{bj}} \]</p>
-                                   <p>where \(\Phi_{aibj}\) is the spring constant on an atom \(a\) along direction \(i\) due
-                                        to a displacement of atom \(b\) along \(j\). \(U_{bj}\) is the displacement of atom
-                                        \(b\) in direction \(j\). This is done for each atom in the unit cell to produce the
-                                        dynamical matrix which can be used to build the phonon modes. The dynamical matrix is
-                                        defined as
-                                   </p>
-                                   <p>\[ D_{aibj}(q) = \frac{\Phi_{aibj}}{\sqrt{m_am_b}}e^{iq\cdot (R_{bj}-R_{ai})} \]</p>
-                                   <p>which is the Fourier transform of the reduced-mass spring constant matrix.
-                                        Diagonalization of the dynamical matrix gives the frequencies of each mode and the
-                                        atomic displacements. These frequencies and displacements are used in TLT to
-                                        determine the mobility via the localization length and relaxation time. These same
-                                        values can also be plugged directly into the scattering law for one neutron</p>
-                                   <p>\[ S(Q,n\omega_s) = \frac{(Q\cdot U_s)^{2n}}{n!}e^{(-Q\cdot U_{total})^2} \]</p>
-                                   <p>where</p>
-                                   <p>\[ U_s = \sqrt{\frac{\hbar}{2m\omega_s}}e_{ds} \]</p>
-                                   <p>and \(\omega_s\) is the frequency from the dynamical matrix and \(e_{ds}\) is the
-                                        displacement of atom \(d\) within mode \(s\) along each direction.<sup>5</sup> This
-                                        provides a way to relate the calculated dynamics back to an experimental process and
-                                        confirm that the calculated dynamics are correct.</p>
-                                   <p>The steps outlined above can be put together to calculate mobility from an experimental
-                                        crystal structure. The precise steps
-                                        involve first determining the 0K structure by minimizing the energy in DFT. Next, DFT
-                                        and Phonopy are used to perform the finite displacement supercell method. These
-                                        results can be fed into oclimax, software developed at Oak Ridge National Lab for
-                                        simulating a VISION INS spectrum.<sup>10</sup> Finally, the phonon data can be used
-                                        to calculate the localization length and the relaxation time necessary to compute the
-                                        mobility. This process was able to rank order three substituted -acenes by mobility,
-                                        demonstrating its accuracy.
-                                   </p>
-                                   <p>While this is a major step forward, there are several limitations associated with this
-                                        technique. Foremost, it is centered on DFT which is computationally expensive. This
-                                        means that the DFT method is limited to small, highly crystalline systems. Therefore,
-                                        it cannot be used to investigate semicrystalline materials such as polymers or
-                                        materials with defects. As such, a more scale-friendly technique is necessary.
-                                        Density functional tight binding (DFTB+) takes DFT and applies the tight-binding
-                                        approximation. This means that DFTB+ is still a quantum simulation technique, but
-                                        its cost is
-                                        reduced by approximately 2 orders of magnitude.<sup>11</sup> Furthermore, it was
-                                        recently shown that the Chebyshev Interaction Model for Efficient Simulation (ChIMES)
-                                        can be used as a correction on DFTB+ to improve phonon predictions without
-                                        significantly adding to the computational cost.<sup>12</sup> This database contains
-                                        computational INS spectra in addition to computed spectra using DFT, DFTB+, and DFTB+
-                                        with ChIMES.
-                                   </p>
-                                   <h4 id="citations">Works Cited</h4>
-                                   <p class="text-muted">1. Calbert, J. P., Filho, D. A. S., Cornil, J. & Bre, J. L. Organic
-                                        semiconductors : A
-                                        theoretical characterization of the basic parameters governing charge transport.
-                                        99, (2002).</p>
-                                   <p class="text-muted">2. Sakanoue, T. & Sirringhaus, H. Band-like temperature dependence
-                                        of mobility in
-                                        a solution-processed organic semiconductor. Nat. Mater. 9, 736–740 (2010).</p>
-                                   <p class="text-muted">3. Ciuchi, S., Fratini, S. & Mayou, D. Transient localization in
-                                        crystalline organic
-                                        semiconductors. Phys. Rev. B - Condens. Matter Mater. Phys. 83, 1–4 (2011).</p>
-                                   <p class="text-muted">4. Fratini, S., Mayou, D. & Ciuchi, S. The transient localization
-                                        scenario for charge
-                                        transport in crystalline organic materials. Adv. Funct. Mater. 26, 2292–2315
-                                        (2016).</p>
-                                   <p class="text-muted">5. Mitchell, P. C. H. Vibrational spectroscopy with neutrons: with
-                                        applications in
-                                        chemistry, biology, materials science and catalysis. 3, (World Scientific, 2005).</p>
-                                   <p class="text-muted">6. Harrelson, T. F. et al. Direct probe of the nuclear modes
-                                        limiting charge mobility in
-                                        molecular semiconductors. Mater. Horizons 6, 182–191 (2019).</p>
-                                   <p class="text-muted">7. Seeger, P. A., Daemen, L. L. & Larese, J. Z. Resolution of
-                                        VISION, a crystal-
-                                        analyzer spectrometer. Nucl. Instruments Methods Phys. Res. Sect. A Accel.
-                                        Spectrometers, Detect. Assoc. Equip. 604, 719–728 (2009).</p>
-                                   <p class="text-muted">8. Kohn, W., & Sham, L. J. (1965). Self-consistent equations
-                                        including exchange and correlation effects. Physical review, 140(4A), A1133.</p>
-                                   <p class="text-muted">9. Togo, A. & Tanaka, I. First principles phonon calculations in
-                                        materials science.
-                                        Scr. Mater. 108, 1–5 (2015).</p>
-                                   <p class="text-muted">10. Cheng, Y. Q., Daemen, L. L., Kolesnikov, A. I. & Ramirez-Cuesta,
-                                        A. J. Simulation
-                                        of Inelastic Neutron Scattering Spectra Using OCLIMAX. J. Chem. Theory
-                                        Comput. 15, 1974–1982 (2019).</p>
-                                   <p class="text-muted">11. Hourahine, B., Aradi, B., Blum, V., Bonafé, F., Buccheri, A.,
-                                        Camacho, C., ... & Frauenheim, T. (2020). DFTB+, a software package for efficient
-                                        approximate density functional theory based atomistic simulations. The Journal of
-                                        chemical physics, 152(12), 124101.</p>
-                                   <p class="text-muted">12. Dantanarayana, V., Nematiaram, T., Vong, D., Anthony, J. E.,
-                                        Troisi, A., Nguyen Cong, K., ... & Moulé, A. J. (2020). Predictive Model of Charge
-                                        Mobilities in Organic Semiconductor Small Molecules with Force-Matched Potentials.
-                                        Journal of chemical theory and computation, 16(6), 3494-3503.</p>
-               </div>
+                              </div>
+                              <p>The finite displacement supercell method uses several approximations to calculate the
+                                   spring constants of each phonon mode.<sup>9</sup> It works by first building a large
+                                   enough
+                                   supercell to avoid the minimum image problem in which an atom interacts with a
+                                   periodic copy of itself. Next, each atom is displaced in a single direction (x, y, or
+                                   z) by a small but finite amount. Then the spring constant is approximated by
+                              </p>
+                              <p>\[ \Phi_{aibj} = \frac{\partial F_{ai}}{\partial U_{bj}} \approx \frac{\Delta
+                                   F_{ai}}{\Delta U_{bj}} \]</p>
+                              <p>where \(\Phi_{aibj}\) is the spring constant on an atom \(a\) along direction \(i\) due
+                                   to a displacement of atom \(b\) along \(j\). \(U_{bj}\) is the displacement of atom
+                                   \(b\) in direction \(j\). This is done for each atom in the unit cell to produce the
+                                   dynamical matrix which can be used to build the phonon modes. The dynamical matrix is
+                                   defined as
+                              </p>
+                              <p>\[ D_{aibj}(q) = \frac{\Phi_{aibj}}{\sqrt{m_am_b}}e^{iq\cdot (R_{bj}-R_{ai})} \]</p>
+                              <p>which is the Fourier transform of the reduced-mass spring constant matrix.
+                                   Diagonalization of the dynamical matrix gives the frequencies of each mode and the
+                                   atomic displacements. These frequencies and displacements are used in TLT to
+                                   determine the mobility via the localization length and relaxation time. These same
+                                   values can also be plugged directly into the scattering law for one neutron</p>
+                              <p>\[ S(Q,n\omega_s) = \frac{(Q\cdot U_s)^{2n}}{n!}e^{(-Q\cdot U_{total})^2} \]</p>
+                              <p>where</p>
+                              <p>\[ U_s = \sqrt{\frac{\hbar}{2m\omega_s}}e_{ds} \]</p>
+                              <p>and \(\omega_s\) is the frequency from the dynamical matrix and \(e_{ds}\) is the
+                                   displacement of atom \(d\) within mode \(s\) along each direction.<sup>5</sup> This
+                                   provides a way to relate the calculated dynamics back to an experimental process and
+                                   confirm that the calculated dynamics are correct.</p>
+                              <p>The steps outlined above can be put together to calculate mobility from an experimental
+                                   crystal structure. The precise steps
+                                   involve first determining the 0K structure by minimizing the energy in DFT. Next, DFT
+                                   and Phonopy are used to perform the finite displacement supercell method. These
+                                   results can be fed into oclimax, software developed at Oak Ridge National Lab for
+                                   simulating a VISION INS spectrum.<sup>10</sup> Finally, the phonon data can be used
+                                   to calculate the localization length and the relaxation time necessary to compute the
+                                   mobility. This process was able to rank order three substituted -acenes by mobility,
+                                   demonstrating its accuracy.
+                              </p>
+                              <p>While this is a major step forward, there are several limitations associated with this
+                                   technique. Foremost, it is centered on DFT which is computationally expensive. This
+                                   means that the DFT method is limited to small, highly crystalline systems. Therefore,
+                                   it cannot be used to investigate semicrystalline materials such as polymers or
+                                   materials with defects. As such, a more scale-friendly technique is necessary.
+                                   Density functional tight binding (DFTB+) takes DFT and applies the tight-binding
+                                   approximation. This means that DFTB+ is still a quantum simulation technique, but
+                                   its cost is
+                                   reduced by approximately 2 orders of magnitude.<sup>11</sup> Furthermore, it was
+                                   recently shown that the Chebyshev Interaction Model for Efficient Simulation (ChIMES)
+                                   can be used as a correction on DFTB+ to improve phonon predictions without
+                                   significantly adding to the computational cost.<sup>12</sup> This database contains
+                                   computational INS spectra in addition to computed spectra using DFT, DFTB+, and DFTB+
+                                   with ChIMES.
+                              </p>
+                              <h4 id="citations">Works Cited</h4>
+                              <p class="text-muted">1. Calbert, J. P., Filho, D. A. S., Cornil, J. & Bre, J. L. Organic
+                                   semiconductors : A
+                                   theoretical characterization of the basic parameters governing charge transport.
+                                   99, (2002).</p>
+                              <p class="text-muted">2. Sakanoue, T. & Sirringhaus, H. Band-like temperature dependence
+                                   of mobility in
+                                   a solution-processed organic semiconductor. Nat. Mater. 9, 736–740 (2010).</p>
+                              <p class="text-muted">3. Ciuchi, S., Fratini, S. & Mayou, D. Transient localization in
+                                   crystalline organic
+                                   semiconductors. Phys. Rev. B - Condens. Matter Mater. Phys. 83, 1–4 (2011).</p>
+                              <p class="text-muted">4. Fratini, S., Mayou, D. & Ciuchi, S. The transient localization
+                                   scenario for charge
+                                   transport in crystalline organic materials. Adv. Funct. Mater. 26, 2292–2315
+                                   (2016).</p>
+                              <p class="text-muted">5. Mitchell, P. C. H. Vibrational spectroscopy with neutrons: with
+                                   applications in
+                                   chemistry, biology, materials science and catalysis. 3, (World Scientific, 2005).</p>
+                              <p class="text-muted">6. Harrelson, T. F. et al. Direct probe of the nuclear modes
+                                   limiting charge mobility in
+                                   molecular semiconductors. Mater. Horizons 6, 182–191 (2019).</p>
+                              <p class="text-muted">7. Seeger, P. A., Daemen, L. L. & Larese, J. Z. Resolution of
+                                   VISION, a crystal-
+                                   analyzer spectrometer. Nucl. Instruments Methods Phys. Res. Sect. A Accel.
+                                   Spectrometers, Detect. Assoc. Equip. 604, 719–728 (2009).</p>
+                              <p class="text-muted">8. Kohn, W., & Sham, L. J. (1965). Self-consistent equations
+                                   including exchange and correlation effects. Physical review, 140(4A), A1133.</p>
+                              <p class="text-muted">9. Togo, A. & Tanaka, I. First principles phonon calculations in
+                                   materials science.
+                                   Scr. Mater. 108, 1–5 (2015).</p>
+                              <p class="text-muted">10. Cheng, Y. Q., Daemen, L. L., Kolesnikov, A. I. & Ramirez-Cuesta,
+                                   A. J. Simulation
+                                   of Inelastic Neutron Scattering Spectra Using OCLIMAX. J. Chem. Theory
+                                   Comput. 15, 1974–1982 (2019).</p>
+                              <p class="text-muted">11. Hourahine, B., Aradi, B., Blum, V., Bonafé, F., Buccheri, A.,
+                                   Camacho, C., ... & Frauenheim, T. (2020). DFTB+, a software package for efficient
+                                   approximate density functional theory based atomistic simulations. The Journal of
+                                   chemical physics, 152(12), 124101.</p>
+                              <p class="text-muted">12. Dantanarayana, V., Nematiaram, T., Vong, D., Anthony, J. E.,
+                                   Troisi, A., Nguyen Cong, K., ... & Moulé, A. J. (2020). Predictive Model of Charge
+                                   Mobilities in Organic Semiconductor Small Molecules with Force-Matched Potentials.
+                                   Journal of chemical theory and computation, 16(6), 3494-3503.</p>
           </div>
      </div>
+</div>
 </div>
 
 <style>
