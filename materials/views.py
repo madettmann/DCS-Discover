@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_list_or_404, get_object_or_404
 from django.db.models import Q
-from .models import Material
+# from .models import Material
 import os
 from bokeh.models import ColumnDataSource, MultiLine
 from bokeh.io import show, curdoc, output_file
@@ -14,10 +14,49 @@ from bokeh.resources import CDN
 from bokeh.embed import components
 import plotly.graph_objects as go
 import plotly.offline as opy
+import json
 
-
-
+class Material:
+    def __init__(self, data_dict):
+        self.id = data_dict["id"]
+        self.compound_name = data_dict["compound_name"]
+        self.structure_url = None if data_dict["structure_url"] == "None" else data_dict["structure_url"]
+        self.iupac_name = data_dict["iupac_name"]
+        self.mobility = None if data_dict["mobility"] == "None" else data_dict["mobility"]
+        self.skeletal_formula_file = None if data_dict["skeletal_formula_file"] == "None" else data_dict["skeletal_formula_file"]
+        self.experimental_data_file = None if data_dict["experimental_data_file"] == "None" else data_dict["experimental_data_file"]
+        self.dft_data_file = None if data_dict["dft_data_file"] == "None" else data_dict["dft_data_file"]
+        self.dftb_data_file = None if data_dict["dftb_data_file"] == "None" else data_dict["dftb_data_file"]
+        self.chimes_data_file = None if data_dict["chimes_data_file"] == "None" else data_dict["chimes_data_file"]
     
+def get_materials():
+    db_file = open('db.json', 'r')
+    db = json.load(db_file)
+    db_file.close()
+    my_materials = []
+    for mat in db["materials"]:
+        my_materials.append(Material(mat))
+    return my_materials
+
+def get_material(id=1):
+    db_file = open('db.json', 'r')
+    db = json.load(db_file)
+    db_file.close()
+    for mat in db["materials"]:
+        if mat["id"] == id:
+            return Material(mat)
+    
+def get_filtered_materials(query=""):
+    query = query.lower()
+    db_file = open('db.json', 'r')
+    db = json.load(db_file)
+    db_file.close()
+    filtered_materials = []
+    for mat in db["materials"]:
+        if query in mat["compound_name"].lower() or query in mat["iupac_name"].lower():
+            filtered_materials.append(Material(mat))
+    return filtered_materials
+
 def get_layout(material):
     data_folder = os.getcwd()
     exp_data_x, exp_data_y, exp_max = GetXY(data_folder+material.experimental_data_file, type="exp")    
@@ -57,20 +96,22 @@ def get_layout(material):
 
 # Create your views here.
 def material_list_view(request):
-    my_materials = get_list_or_404(Material)
+    # my_materials = get_list_or_404(Material)
+    my_materials = get_materials()
     cwd = os.getcwd()
     context = {"materials_list": my_materials, "my_cwd": cwd }
     return render(request, "materials.html", context)
 
 def material_detail_view(request, id=None):
-    my_material = get_object_or_404(Material, id=id)
+    my_material = get_material(id=id)
     layout = get_layout(my_material)
     context = {"material": my_material, "layout": layout}
     return render(request, "material-detail.html", context)
 
 def search_results_view(request):
     query = request.GET.get('q')
-    my_materials = Material.objects.filter(Q(compound_name__icontains=query) | Q(iupac_name__icontains=query))
+    # my_materials = Material.objects.filter(Q(compound_name__icontains=query) | Q(iupac_name__icontains=query))
+    my_materials = get_filtered_materials(query=query)
     cwd = os.getcwd()
     context = {"materials_list": my_materials, "my_cwd": cwd}
     return render(request, "materials.html", context)
